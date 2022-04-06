@@ -1,6 +1,7 @@
 name: Sample
 
 on:
+  # test
   workflow_dispatch:
   issue_comment:
   
