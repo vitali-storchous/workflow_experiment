@@ -17,4 +17,4 @@ jobs:
       - uses: actions/checkout@v2
       - run: |
           echo ${{ github.event_name }}
-          echo ${{ github.event }}
+          echo ${{ parseJSON(github.event) }}
