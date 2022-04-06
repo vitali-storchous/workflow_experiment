@@ -18,7 +18,7 @@ jobs:
         id: prepare_pr_description
         run: |
           old_pr_description="${{ github.event.pull_request.body }}"
-          echo ::set-output name=pr_description::${$old_pr_description/"- [x] sample"/"- [ ] sample"}
+          echo ::set-output name=pr_description::${old_pr_description/"- [x] sample"/"- [ ] sample"}
       - name: Update PR description
         uses: riskledger/update-pr-description@v2
         with:
