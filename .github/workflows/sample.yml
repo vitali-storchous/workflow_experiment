@@ -2,9 +2,8 @@ name: Sample
 
 on:
   # test
-  push:
   workflow_dispatch:
-  issue_comment:
+  pull_request:
   
 
 jobs:
