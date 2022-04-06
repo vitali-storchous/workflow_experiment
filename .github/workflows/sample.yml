@@ -17,3 +17,8 @@ jobs:
       - run: |
           echo ${{ github.event_name }}
           echo ${{ toJSON(github.event) }}
+      - uses: gr2m/create-or-update-pull-request-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          body: "${{ toJSON(github.event).pull_request.body }} updated"
