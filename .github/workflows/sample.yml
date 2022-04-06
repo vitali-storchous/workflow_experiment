@@ -18,7 +18,8 @@ jobs:
         id: prepare_pr_description
         run: |
           old_pr_description="${{ github.event.pull_request.body }}"
-          new_pr_description="${old_pr_description/'- [x] sample'/'- [ ] sample (executed on $GITHUB_SHA)'}"
+          updated_checkbox="- [ ] sample (executed on $GITHUB_SHA)"
+          new_pr_description="${old_pr_description/'- [x] sample'/$updated_checkbox}"
           echo "PR_DESCRIPTION<<EOF" >> $GITHUB_ENV
           echo "$new_pr_description" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
