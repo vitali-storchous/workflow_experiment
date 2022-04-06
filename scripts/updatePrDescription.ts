@@ -3,7 +3,7 @@ import * as path from 'path'
 
 let prDescriptionArg = process.argv.find(arg => arg.split('=')[0] === '--prDescription')
 if (prDescriptionArg === undefined) throw new Error('--prDescription key is not provided')
-let prDescription = fs.readFileSync(path.join(prDescriptionArg.split('=')[1]), {encoding: 'utf8'})
+let prDescription = fs.readFileSync(path.join(process.cwd(), prDescriptionArg.split('=')[1]), {encoding: 'utf8'})
 let searchRegexKey = process.argv.find(arg => arg.split('=')[0] === '--searchRegex')
 if (searchRegexKey === undefined) throw new Error('--searchRegex is not provided')
 let searchRegex = searchRegexKey.split('=')[1]
