@@ -20,7 +20,7 @@ jobs:
           npm i
           echo "${{ github.event.pull_request.body }}" >> ./prDescription.txt
           echo "PR_DESCRIPTION<<EOF" >> $GITHUB_ENV
-          npx ts-node ./scripts/updatePrDescription.ts --searchRegex="- [x] sample(.*)" --replaceWith="- [ ] sample (executed on abcd1234)" --prDescription=prDescription.txt >> $GITHUB_ENV
+          npx ts-node ./scripts/updatePrDescription.ts --searchRegex="- [x] sample(.*)" --replaceWith="- [ ] sample (executed on $GITHUB_SHA)" --prDescription=prDescription.txt >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
       - name: Update PR description
         uses: riskledger/update-pr-description@v2
