@@ -17,12 +17,10 @@ jobs:
       - name: Prepare updated PR description
         id: prepare_pr_description
         run: |
-          old_pr_description="${{ github.event.pull_request.body }}"
-          old_checkbox_regex="- [x] sample (.*)\n"
-          updated_checkbox="- [ ] sample (executed on $GITHUB_SHA)\n"
-          new_pr_description=$("$old_pr_description" | sed -e "s/$old_checkbox_regex/$updated_checkbox/g")
+          npm i
+          echo "${{ github.event.pull_request.body }}" >> ./resources/prDescription.txt
           echo "PR_DESCRIPTION<<EOF" >> $GITHUB_ENV
-          echo "$new_pr_description" >> $GITHUB_ENV
+          cat npx ts-node ./scripts/updatePrDescription.ts --searchRegex="- [x] sample(.*)" --replaceWith="- [ ] sample (executed on abcd1234)" --prDescription=.\resources\prDescription.txt >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
       - name: Update PR description
         uses: riskledger/update-pr-description@v2
