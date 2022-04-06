@@ -16,8 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: |
           echo ${{ github.event_name }}
-      - uses: kt3k/update-pr-description@v1.0.1
+      - uses: riskledger/update-pr-description@dev
         with:
-          pr_body: "${{ github.event.pull_request.body }} \nupdated"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          destination_branch: main
+          body: "${{ github.event.pull_request.body }} \nupdated"
+          token: ${{ secrets.GITHUB_TOKEN }}
