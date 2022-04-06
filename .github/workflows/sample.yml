@@ -20,3 +20,4 @@ jobs:
         with:
           pr_body: "${{ github.event.pull_request.body }} \nupdated"
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          destination_branch: main
