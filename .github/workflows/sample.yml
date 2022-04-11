@@ -10,38 +10,39 @@ on:
 jobs:
 
   E2E_Ubuntu:
-    if: contains(github.event.pull_request.body, '- [x] sample')
+    # if: contains(github.event.pull_request.body, '- [x] sample')
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Prepare updated PR description
-        id: prepare_pr_description
-        run: |
-          npm i
-          echo "${{ github.event.pull_request.body }}" >> ./prDescription.txt
-          echo "PR_DESCRIPTION<<EOF" >> $GITHUB_ENV
-          npx ts-node ./scripts/updatePrDescription.ts --searchRegex="- [x] sample(.*)" --replaceWith="- [ ] sample (executed on ${{ github.event.pull_request.head.sha }})" --prDescription=prDescription.txt >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-      - name: Update PR description
-        uses: riskledger/update-pr-description@v2
-        with:
-          body: ${{ env.PR_DESCRIPTION }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/github-script@v5
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: 'test is excecuted! commit - ${{ github.event.pull_request.head.sha }}'
-            })
-      - uses: convictional/trigger-workflow-and-wait@v1.6.0
-        with:
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.repository }}
-          github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
-          workflow_file_name: sample.yml
-          wait_workflow: true
+      # # - uses: actions/checkout@v2
+      # - name: Prepare updated PR description
+      #   id: prepare_pr_description
+      #   run: |
+      #     npm i
+      #     echo "${{ github.event.pull_request.body }}" >> ./prDescription.txt
+      #     echo "PR_DESCRIPTION<<EOF" >> $GITHUB_ENV
+      #     npx ts-node ./scripts/updatePrDescription.ts --searchRegex="- [x] sample(.*)" --replaceWith="- [ ] sample (executed on ${{ github.event.pull_request.head.sha }})" --prDescription=prDescription.txt >> $GITHUB_ENV
+      #     echo "EOF" >> $GITHUB_ENV
+      # - name: Update PR description
+      #   uses: riskledger/update-pr-description@v2
+      #   with:
+      #     body: ${{ env.PR_DESCRIPTION }}
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      # - uses: actions/github-script@v5
+      #   with:
+      #     github-token: ${{secrets.GITHUB_TOKEN}}
+      #     script: |
+      #       github.rest.issues.createComment({
+      #         issue_number: context.issue.number,
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         body: 'test is excecuted! commit - ${{ github.event.pull_request.head.sha }}'
+      #       })
+      # - uses: convictional/trigger-workflow-and-wait@v1.6.0
+      #   with:
+      #     owner: ${{ github.repository_owner }}
+      #     repo: ${{ github.repository }}
+      #     github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+      #     workflow_file_name: sample.yml
+      #     wait_workflow: true
+      - run: echo Hello world
