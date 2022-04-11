@@ -1,17 +1,17 @@
-name: Regression
+# name: Regression
 
-on:
-  push:
-  # pull_request:
-  #   types: [opened, edited]
+# on:
+#   push:
+#   # pull_request:
+#   #   types: [opened, edited]
 
-jobs:
-  Test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+# jobs:
+#   Test:
+#     runs-on: ${{ matrix.os }}
+#     strategy:
+#       matrix:
+#         os: [ubuntu-latest, windows-latest]
 
-    steps:
-      - uses: actions/checkout@v2
-      - run: echo test is completed
+#     steps:
+#       - uses: actions/checkout@v2
+#       - run: echo test is completed
