@@ -1,7 +1,6 @@
 name: Sample
 
 on:
-  # test
   push:
   workflow_dispatch:
   pull_request:
