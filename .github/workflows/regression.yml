@@ -9,7 +9,7 @@ jobs:
   E2E_Ubuntu:
     runs-on: ${{ matrix.os }}
     matrix:
-      os: ['ubuntu-latest', 'windows-latest']
+      os: [ubuntu-latest, windows-latest]
 
     steps:
       - uses: actions/checkout@v2
