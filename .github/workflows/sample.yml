@@ -39,3 +39,8 @@ jobs:
               repo: context.repo.repo,
               body: 'test is excecuted! commit - ${{ github.event.pull_request.head.sha }}'
             })
+      - uses: convictional/trigger-workflow-and-wait@v1.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+          workflow_file_name: sample.yml
+          wait_workflow: true
