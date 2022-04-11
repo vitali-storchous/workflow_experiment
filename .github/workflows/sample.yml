@@ -1,39 +1,39 @@
-# name: Sample
+name: Sample
 
-# on:
-#   # test
-#   workflow_dispatch:
-#   pull_request:
-#     types: [opened, edited]
+on:
+  # test
+  workflow_dispatch:
+  pull_request:
+    types: [opened, edited]
 
-# jobs:
+jobs:
 
-#   E2E_Ubuntu:
-#     if: contains(github.event.pull_request.body, '- [x] sample')
-#     runs-on: ubuntu-latest
+  E2E_Ubuntu:
+    if: contains(github.event.pull_request.body, '- [x] sample')
+    runs-on: ubuntu-latest
 
-#     steps:
-#       - uses: actions/checkout@v2
-#       - name: Prepare updated PR description
-#         id: prepare_pr_description
-#         run: |
-#           npm i
-#           echo "${{ github.event.pull_request.body }}" >> ./prDescription.txt
-#           echo "PR_DESCRIPTION<<EOF" >> $GITHUB_ENV
-#           npx ts-node ./scripts/updatePrDescription.ts --searchRegex="- [x] sample(.*)" --replaceWith="- [ ] sample (executed on ${{ github.event.pull_request.head.sha }})" --prDescription=prDescription.txt >> $GITHUB_ENV
-#           echo "EOF" >> $GITHUB_ENV
-#       - name: Update PR description
-#         uses: riskledger/update-pr-description@v2
-#         with:
-#           body: ${{ env.PR_DESCRIPTION }}
-#           token: ${{ secrets.GITHUB_TOKEN }}
-#       - uses: actions/github-script@v5
-#         with:
-#           github-token: ${{secrets.GITHUB_TOKEN}}
-#           script: |
-#             github.rest.issues.createComment({
-#               issue_number: context.issue.number,
-#               owner: context.repo.owner,
-#               repo: context.repo.repo,
-#               body: 'test is excecuted! commit - ${{ github.event.pull_request.head.sha }}'
-#             })
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare updated PR description
+        id: prepare_pr_description
+        run: |
+          npm i
+          echo "${{ github.event.pull_request.body }}" >> ./prDescription.txt
+          echo "PR_DESCRIPTION<<EOF" >> $GITHUB_ENV
+          npx ts-node ./scripts/updatePrDescription.ts --searchRegex="- [x] sample(.*)" --replaceWith="- [ ] sample (executed on ${{ github.event.pull_request.head.sha }})" --prDescription=prDescription.txt >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+      - name: Update PR description
+        uses: riskledger/update-pr-description@v2
+        with:
+          body: ${{ env.PR_DESCRIPTION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'test is excecuted! commit - ${{ github.event.pull_request.head.sha }}'
+            })

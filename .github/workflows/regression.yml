@@ -6,7 +6,7 @@ on:
   #   types: [opened, edited]
 
 jobs:
-  E2E_Ubuntu:
+  Test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
