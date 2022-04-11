@@ -17,6 +17,7 @@ jobs:
       - name: Prepare updated PR description
         id: prepare_pr_description
         run: |
+          echo ${{ github.event.pull_request.body }}
           npm i
           echo "${{ github.event.pull_request.body }}" >> ./prDescription.txt
           echo "PR_DESCRIPTION<<EOF" >> $GITHUB_ENV
