@@ -18,7 +18,6 @@ jobs:
       - name: Prepare updated PR description
         id: prepare_pr_description
         run: |
-          echo "${{ toJSON(github) }}"
           npm i
           echo "${{ github.event.pull_request.body }}" >> ./prDescription.txt
           echo "PR_DESCRIPTION<<EOF" >> $GITHUB_ENV
@@ -41,8 +40,8 @@ jobs:
             })
       - uses: convictional/trigger-workflow-and-wait@v1.6.0
         with:
-          owner: keithconvictional
-          repo: myrepo
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.repository.name }}
           github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
           workflow_file_name: sample.yml
           wait_workflow: true
