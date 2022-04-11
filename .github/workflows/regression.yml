@@ -1,0 +1,15 @@
+name: Sample
+
+on:
+  push:
+  # pull_request:
+  #   types: [opened, edited]
+
+jobs:
+
+  E2E_Ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo test is completed
