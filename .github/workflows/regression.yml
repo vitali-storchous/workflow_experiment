@@ -1,0 +1,12 @@
+name: Regressoin
+
+on:
+  push:
+
+jobs:
+
+  E2E_Ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo Hello world
