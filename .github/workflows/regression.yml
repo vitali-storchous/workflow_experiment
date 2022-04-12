@@ -3,7 +3,7 @@ name: Regression
 on:
   workflow_dispatch:
     inputs:
-      os:
+      operating_system:
         type: choice
         description: OS
         options: 
@@ -17,9 +17,9 @@ on:
 jobs:
 
   E2E_Ubuntu:
-    runs-on: ${{ github.event.inputs.os }}-latest
+    runs-on: ${{ github.event.inputs.operating_system }}-latest
     steps:
-      - run: echo regression is done on ${{ github.event.inputs.os }}
+      - run: echo regression is done on ${{ github.event.inputs.operating_system }}
       - if: ${{ github.event.inputs.pull_request }} != ''
         run: echo executed for ${{ github.event.inputs.pull_request }}
       - if: ${{ github.event.inputs.pull_request }} != ''
