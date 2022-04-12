@@ -1,12 +1,35 @@
-name: Regressoin
+name: Regression
 
 on:
   workflow_dispatch:
+    inputs:
+      os:
+        type: choice
+        description: OS
+        options: 
+        - ubuntu
+        - windows
+        - macos
+        default: ubuntu
+      pull_request:
+        type: string
 
 jobs:
 
   E2E_Ubuntu:
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ github.event.inputs.os }}-latest
     steps:
-      - run: echo Hello world
+      - run: echo regression is done on ${{ github.event.inputs.os }}
+      - if: ${{ github.event.inputs.pull_request }} != ''
+        run: echo executed for ${{ github.event.inputs.pull_request }}
+      - if: ${{ github.event.inputs.pull_request }} != ''
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: ${{ github.event.inputs.pull_request }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'test is excecuted! commit - ${{ github.sha }}'
+            })

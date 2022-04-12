@@ -1,0 +1,25 @@
+name: Test Suite
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_suite:
+        type: choice
+        description: Test suite
+        options: 
+        - Navigation
+        - Onboarding
+        - dApps operations
+        - Transactions
+      pull_request:
+        type: string
+
+jobs:
+
+  E2E_Ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo execution of ${{ github.event.inputs.test_suite }} is done
+      - if: ${{ github.event.inputs.pull_request }} != ''
+        run: echo executed for ${{ github.event.inputs.pull_request }}
