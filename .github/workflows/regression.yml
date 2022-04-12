@@ -21,8 +21,6 @@ jobs:
     steps:
       - run: echo regression is done on ${{ github.event.inputs.os }}
       - if: ${{ github.event.inputs.pull_request }} != ''
-        run: echo executed for ${{ github.event.inputs.pull_request }}
-      - if: ${{ github.event.inputs.pull_request }} != ''
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
