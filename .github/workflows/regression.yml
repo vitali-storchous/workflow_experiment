@@ -10,6 +10,7 @@ on:
         - ubuntu
         - windows
         - macos
+        default: ubuntu
       pull_request:
         type: string
 
