@@ -16,7 +16,7 @@ on:
 jobs:
 
   E2E_Ubuntu:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event.inputs.os }}-latest
     steps:
       - run: echo regression is done on ${{ github.event.inputs.os }}
       - if: ${{ github.event.inputs.pull_request }} != ''
