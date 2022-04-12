@@ -31,5 +31,5 @@ jobs:
               issue_number: ${{ github.event.inputs.pull_request }},
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Regression test on ${{ github.event.inputs.os }} is finished! Tested commit - ${{ github.sha }}'
+              body: '[Regression test](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) on ${{ github.event.inputs.os }} is finished! Tested commit - ${{ github.sha }}, [report](https://www.google.com)'
             })
