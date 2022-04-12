@@ -3,11 +3,12 @@ name: Sample
 on:
   workflow_dispatch:
     inputs:
-      type: choice
-      description: Who to greet
-      options: 
-      - monalisa
-      - cschleiden
+      name:
+        type: choice
+        description: Who to greet
+        options: 
+        - monalisa
+        - cschleiden
   
 
 jobs:
