@@ -11,6 +11,8 @@ on:
         - Onboarding
         - dApps operations
         - Transactions
+      pull_request:
+        type: string
 
 jobs:
 
@@ -19,3 +21,5 @@ jobs:
 
     steps:
       - run: echo execution of ${{ github.event.inputs.test_suite }} is done
+      - if: ${{ github.event.inputs.pull_request }} != ''
+        run: echo executed for ${{ github.event.inputs.pull_request }}

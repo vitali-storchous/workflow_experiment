@@ -10,6 +10,8 @@ on:
         - ubuntu
         - windows
         - macos
+      pull_request:
+        type: string
 
 jobs:
 
@@ -17,3 +19,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo regression is done on ${{ github.event.inputs.os }}
+      - if: ${{ github.event.inputs.pull_request }} != ''
+        run: echo executed for ${{ github.event.inputs.pull_request }}
