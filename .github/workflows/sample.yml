@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       type: choice
-        description: Who to greet
-        options: 
-        - monalisa
-        - cschleiden
+      description: Who to greet
+      options: 
+      - monalisa
+      - cschleiden
   
 
 jobs:
