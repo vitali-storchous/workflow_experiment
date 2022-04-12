@@ -1,0 +1,21 @@
+name: Test Suite
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_suite:
+        type: choice
+        description: Test suite
+        options: 
+        - Navigation
+        - Onboarding
+        - dApps operations
+        - Transactions
+
+jobs:
+
+  E2E_Ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo execution of ${{ github.event.inputs.test_suite }} is done
