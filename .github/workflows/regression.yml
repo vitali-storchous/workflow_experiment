@@ -26,7 +26,7 @@ jobs:
           echo regression is done on ${{ github.event.inputs.os }}
           echo $GITHUB_REF
           echo ${{ steps.extract_branch.outputs.branch }}
-      - if: ${{ github.event.inputs.pull_request }} != ''
+      - if: '${{ github.event.inputs.pull_request }}' != ''
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
