@@ -22,7 +22,8 @@ jobs:
       - name: Extract branch name
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      - run: |
+      - name: Echo
+        run: |
           echo regression is done on ${{ github.event.inputs.os }}
           echo $GITHUB_REF
           echo ${{ steps.extract_branch.outputs.branch }}
