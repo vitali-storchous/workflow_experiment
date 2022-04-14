@@ -19,10 +19,13 @@ jobs:
   E2E_Ubuntu:
     runs-on: ${{ github.event.inputs.os }}-latest
     steps:
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       - run: |
           echo regression is done on ${{ github.event.inputs.os }}
           echo $GITHUB_REF
-          echo ${{ github.head_ref }}
+          echo ${{ steps.extract_branch.outputs.branch }}
       - if: ${{ github.event.inputs.pull_request }} != ''
         uses: actions/github-script@v5
         with:
