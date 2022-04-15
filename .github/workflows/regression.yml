@@ -1,6 +1,7 @@
 name: Regression
 
 on:
+  # test
   workflow_dispatch:
     inputs:
       os:
