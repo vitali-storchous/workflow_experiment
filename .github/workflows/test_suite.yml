@@ -14,6 +14,8 @@ on:
         - Transactions
       pull_request:
         type: string
+        # some text
+        # some text
 
 jobs:
 
@@ -23,4 +25,13 @@ jobs:
     steps:
       - run: echo execution of ${{ github.event.inputs.test_suite }} is done
       - if: ${{ github.event.inputs.pull_request }} != ''
-        run: echo executed for ${{ github.event.inputs.pull_request }}
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: ${{ github.event.inputs.pull_request }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '[${{ github.event.inputs.test_suite }} test suite execution](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) is finished! Tested commit - ${{ github.sha }}, [report](https://www.google.com)'
+            })

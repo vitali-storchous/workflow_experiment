@@ -14,16 +14,22 @@ on:
         default: ubuntu
       pull_request:
         type: string
+        # some text
 
 jobs:
 
   E2E_Ubuntu:
     runs-on: ${{ github.event.inputs.os }}-latest
     steps:
-      - run: echo regression is done on ${{ github.event.inputs.os }}
-      - if: ${{ github.event.inputs.pull_request }} != ''
-        run: echo executed for ${{ github.event.inputs.pull_request }}
-      - if: ${{ github.event.inputs.pull_request }} != ''
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      - name: Echo
+        run: |
+          echo regression is done on ${{ github.event.inputs.os }}
+          echo $GITHUB_REF
+          echo ${{ steps.extract_branch.outputs.branch }}
+      - if: github.event.inputs.pull_request != ''
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -32,5 +38,5 @@ jobs:
               issue_number: ${{ github.event.inputs.pull_request }},
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'test is excecuted! commit - ${{ github.sha }}'
+              body: '[Regression test](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) on ${{ github.event.inputs.os }} is finished! Tested commit - ${{ github.sha }}, [report](https://www.google.com)'
             })
