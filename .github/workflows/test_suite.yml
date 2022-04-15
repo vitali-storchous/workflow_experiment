@@ -13,6 +13,7 @@ on:
         - Transactions
       pull_request:
         type: string
+        # some text
 
 jobs:
 
