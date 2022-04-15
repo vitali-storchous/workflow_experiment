@@ -14,6 +14,7 @@ on:
       pull_request:
         type: string
         # some text
+        # some text
 
 jobs:
 
